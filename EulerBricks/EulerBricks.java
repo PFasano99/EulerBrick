@@ -20,6 +20,8 @@ public class EulerBricks {
 
         BigDecimal add1 = new BigDecimal("1");
 
+        System.out.println("Start");
+
         do {
             
             a = a.add(add1);
