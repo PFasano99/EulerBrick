@@ -21,9 +21,10 @@ public class EulerBricks {
         BigDecimal add1 = new BigDecimal("1");
 
         do {
-            b = new BigDecimal("500000000001");
             
-
+            a = a.add(add1);
+            saveForNext(a, b, c);
+            b = new BigDecimal("500000000001");
             /*
              * old version of the counter for (int i = 0; i < 1000; i++) { win = check(a, b,
              * c); a = a.add(add1); String string = "a: " + a.toString() + " b: " +
@@ -32,14 +33,12 @@ public class EulerBricks {
              * saveResoult(a, b, c); totalWin = true; } }
              */
 
-            a = a.add(add1);
-            
-            BigDecimal l = a.subtract(new BigDecimal("1"));
 
             int x = -1;
             do {
+                BigDecimal l = a.subtract(new BigDecimal("1"));
                 win = check(a, b, c);
-                b = b.add(add1);
+                
                 String string = "a: " + a.toString() + " b: " + b.toString() + " c: " + c.toString();
                 System.out.println(string);
                 if (win) {
@@ -48,12 +47,14 @@ public class EulerBricks {
                 }
                 x = b.compareTo(l);
 
-                BigDecimal h = b.subtract(new BigDecimal("1"));
-                c = new BigDecimal("500000000000");
+                saveForNext(a, b, c);
+                
+                BigDecimal h = b.subtract(new BigDecimal("1"));                
                 int j = -1;
+                int f = 0;
                 do {
                     win = check(a, b, c);
-                    c = c.add(add1);
+                    
                     string = "a: " + a.toString() + " b: " + b.toString() + " c: " + c.toString();
                     System.out.println(string);
                     if (win) {
@@ -61,14 +62,22 @@ public class EulerBricks {
                         totalWin = true;
                     }
                     j = c.compareTo(h);
+                    c = c.add(add1);
+
+                    f++;
+                    if(f>=100000)
+                    {
+                        saveResoult(a, b, c);
+                        f=0;
+                    }
+
+
                 } while (j == -1);  
 
-
-            } while (x == -1);
-
-           
-            saveForNext(a, b, c);
-
+                c = new BigDecimal("500000000000");
+                b = b.add(add1);
+                saveForNext(a, b, c);
+            } while (x == -1);            
         } while (win == false || totalWin == false);
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
