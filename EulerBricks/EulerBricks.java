@@ -22,7 +22,7 @@ public class EulerBricks {
 
         do {
             b = new BigDecimal("500000000001");
-            c = new BigDecimal("500000000000");
+            
 
             /*
              * old version of the counter for (int i = 0; i < 1000; i++) { win = check(a, b,
@@ -33,7 +33,7 @@ public class EulerBricks {
              */
 
             a = a.add(add1);
-            BigDecimal h = b.subtract(new BigDecimal("1"));
+            
             BigDecimal l = a.subtract(new BigDecimal("1"));
 
             int x = -1;
@@ -48,6 +48,8 @@ public class EulerBricks {
                 }
                 x = b.compareTo(l);
 
+                BigDecimal h = b.subtract(new BigDecimal("1"));
+                c = new BigDecimal("500000000000");
                 int j = -1;
                 do {
                     win = check(a, b, c);
